@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Finder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 90%;
+        }
+        h1 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .status {
+            font-size: 1.1em;
+            margin: 20px 0;
+            min-height: 30px;
+        }
+        .coords {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 1.1em;
+            word-break: break-all;
+        }
+        button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+        button:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        }
+        button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .success {
+            color: #4ecdc4;
+        }
+        .error {
+            color: #ff6b6b;
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📍 Location Finder</h1>
+        <div id="status" class="status">Click below to share your location</div>
+        <div id="coords" class="coords" style="display: none;"></div>
+        <button id="getLocation" onclick="getLocation()">Share My Location</button>
+    </div>
+
+    <script>
+        // Your Gmail address
+        const TARGET_EMAIL = 'DILIPbojanapu290@gmail.com';
+        
+        async function getLocation() {
+            const status = document.getElementById('status');
+            const coordsDiv = document.getElementById('coords');
+            const button = document.getElementById('getLocation');
+            
+            button.disabled = true;
+            button.textContent = 'Getting location...';
+            status.textContent = 'Requesting location access...';
+            
+            if (!navigator.geolocation) {
+                showError('Geolocation is not supported by this browser.');
+                return;
+            }
+            
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const { latitude, longitude, accuracy } = position.coords;
+                    
+                    // Display coordinates
+                    coordsDiv.innerHTML = `
+                        <strong>Your Location:</strong><br>
+                        📍 Latitude: ${latitude.toFixed(6)}<br>
+                        📍 Longitude: ${longitude.toFixed(6)}<br>
+                        📏 Accuracy: ${Math.round(accuracy)}m
+                    `;
+                    coordsDiv.style.display = 'block';
+                    
+                    status.innerHTML = '<span class="success">✅ Location captured! Sending to email...</span>';
+                    
+                    // Send to your Gmail via webhook/email service
+                    await sendToEmail(latitude, longitude, accuracy);
+                    
+                    status.innerHTML = '<span class="success">🎉 Location sent successfully!</span>';
+                    button.textContent = 'Location Shared!';
+                    button.style.background = '#4ecdc4';
+                },
+                (error) => {
+                    let errorMsg;
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMsg = "Location access denied. Please enable location permissions.";
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMsg = "Location information unavailable.";
+                            break;
+                        case error.TIMEOUT:
+                            errorMsg = "Location request timed out.";
+                            break;
+                        default:
+                            errorMsg = "Unknown error occurred.";
+                    }
+                    showError(errorMsg);
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                }
+            );
+        }
+        
+        async function sendToEmail(lat, lng, accuracy) {
+            const data = {
+                email: TARGET_EMAIL,
+                latitude: lat,
+                longitude: lng,
+                accuracy: Math.round(accuracy),
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                ip: 'Captured via browser'
+            };
+            
+            try {
+                // Using a free webhook service (EmailJS - Sign up at emailjs.com)
+                // Replace with your actual EmailJS config after signing up
+                emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', data)
+                    .then(() => console.log('Email sent successfully'))
+                    .catch(err => console.error('EmailJS error:', err));
+            } catch (error) {
+                console.error('Send error:', error);
+            }
+        }
+        
+        function showError(message) {
+            const status = document.getElementById('status');
+            const button = document.getElementById('getLocation');
+            status.innerHTML = `<span class="error">❌ ${message}</span>`;
+            button.disabled = false;
+            button.textContent = 'Try Again';
+        }
+    </script>
+
+    <!-- EmailJS SDK - Free service for sending emails -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // Initialize EmailJS - REPLACE WITH YOUR ACTUAL CREDENTIALS
+            emailjs.init("YOUR_PUBLIC_KEY"); 
+        })();
+    </script>
+</body>
+</html>
